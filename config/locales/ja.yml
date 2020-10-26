@@ -1,0 +1,18 @@
+ja:
+ activerecord:
+   attributes:
+     user:
+       name: 名前
+     selection:
+       company_name: 会社名
+       position: 職種
+       agent: エージェント
+       entry_day: エントリー日
+       phase_id: フェーズ
+       live_flg: 生存フラグ
+       refusal_reason: 理由
+       place: 場所
+       sumally: 要約
+       appeal: 良いところ
+       concern: 懸念点
+       memo: メモ
