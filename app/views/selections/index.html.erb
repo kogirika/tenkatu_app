@@ -72,6 +72,8 @@
           <th style="width:15%">エントリー日</th>  <%# 5 %>
           <th style="width:9%">リンク</th>        <%# 6 %>
           <th style="width:10%">メモ</th>         <%# 7 %>
+          <th style="width:10%">詳細</th>         <%# 8 %>
+
         </tr>
       </thead>
       <% @selections.each do |selection| %>
@@ -84,6 +86,7 @@
           <td><%= selection.entry_day %></td>    <%# 5 エントリー日%>
           <td>リンク</td>                         <%# 6 リンク%>
           <td><%= selection.memo %></td>         <%# 7 メモ%>
+          <td><%= link_to "詳細", selection_path(selection.id) %></td>         <%# 8 メモ%>
         </tr>
       </tbody>
       <% end %>
