@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   
-  resources :slections
+  resources :selections
   root "selections#index"
 
 
