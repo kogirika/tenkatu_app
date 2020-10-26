@@ -20,6 +20,15 @@ class SelectionsController < ApplicationController
   def show #処理は共通化
   end
 
+  def destroy
+    @selection = Selection.find(params[:id])
+    if @selection.destroy
+      redirect_to root_path
+    else
+      render :show
+    end
+  end
+
   private
 
   def selection_params
