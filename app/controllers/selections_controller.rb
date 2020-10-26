@@ -1,5 +1,5 @@
 class SelectionsController < ApplicationController
-  before_action :set_selection, only: [:show]
+  before_action :set_selection, only: [:show, :destroy, :edit, :update]
 
   def index
     @selections = Selection.all
@@ -17,11 +17,21 @@ class SelectionsController < ApplicationController
     end
   end
 
-  def show #処理は共通化
+  def show #処理前にset_selectionを呼ぶ
   end
 
-  def destroy
-    @selection = Selection.find(params[:id])
+  def edit #処理前にset_selectionを呼ぶ
+  end
+
+  def update #処理前にset_selectionを呼ぶ
+    if @selection.update(selection_params)
+      redirect_to selection_path(params[:id])
+    else
+      render :edit
+    end
+  end
+
+  def destroy #処理前にset_selectionを呼ぶ
     if @selection.destroy
       redirect_to root_path
     else
@@ -32,7 +42,9 @@ class SelectionsController < ApplicationController
   private
 
   def selection_params
-    params.require(:selection).permit(:company_name, :position, :entry_day, :phase_id, :live_flg, :agent, :memo).merge(user_id: current_user.id)
+    params.require(:selection).permit(:company_name, :position, :entry_day, :phase_id,
+                                      :live_flg, :agent, :memo, :url ,:sumally, :appeal, :concern,
+                                      :place, :refusal_reason).merge(user_id: current_user.id)
   end
 
   def set_selection

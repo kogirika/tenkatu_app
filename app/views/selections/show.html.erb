@@ -42,7 +42,7 @@
       <td><%= @selection.sumally %></td>
     </tr>
     <tr>
-      <td>良いところ</td>
+      <td>良い点</td>
       <td><%= @selection.appeal %></td>
     </tr>
     <tr>
@@ -76,4 +76,8 @@
 
 <div>
   <%= link_to "削除", selection_path(@selection.id), method: :DELETE %>
+</div>
+
+<div>
+  <%= link_to "編集", edit_selection_path(@selection.id) %>
 </div>
