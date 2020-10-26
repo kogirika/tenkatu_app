@@ -8,7 +8,7 @@ class Selection < ApplicationRecord
 
   # バリデーション
 with_options presence: true do
-  validates :company_name, :phase_id, :entry_day, :live_flg
+  validates :company_name, :phase_id, :entry_day
 end
 
 #アソシエーション
