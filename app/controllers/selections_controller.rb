@@ -1,4 +1,5 @@
 class SelectionsController < ApplicationController
+  before_action :set_selection, only: [:show]
 
   def index
     @selections = Selection.all
@@ -16,9 +17,16 @@ class SelectionsController < ApplicationController
     end
   end
 
+  def show #処理は共通化
+  end
+
   private
 
   def selection_params
     params.require(:selection).permit(:company_name, :position, :entry_day, :phase_id, :live_flg, :agent, :memo).merge(user_id: current_user.id)
+  end
+
+  def set_selection
+    @selection = Selection.find(params[:id])
   end
 end
