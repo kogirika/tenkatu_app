@@ -8,7 +8,6 @@ class SelectionsController < ApplicationController
 
   def create
     @selection = Selection.new(selection_params)
-    live_flg = true
     if @selection.save
       redirect_to root_path
     else
@@ -18,6 +17,7 @@ class SelectionsController < ApplicationController
   end
 
   def show #処理前にset_selectionを呼ぶ
+    @interviews = Interview.all
   end
 
   def edit #処理前にset_selectionを呼ぶ

@@ -13,7 +13,7 @@
   </ul>
 </div>
 
-<%# 簡易登録 %>
+<%# 登録 %>
   <div class="container">
     <%= form_with model: @selection, local: true do |f| %>
 
@@ -71,7 +71,7 @@
         </div>
 
         <div class="col">
-          <%= f.date_field :entry_day, value: Time.now.strftime("%Y-%m-%d"), class: "form-control " %>
+          <%= f.date_field :entry_day, class: "form-control " %>
         </div>
 
         <div class="col">

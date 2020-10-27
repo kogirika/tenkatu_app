@@ -81,3 +81,26 @@
 <div>
   <%= link_to "編集", edit_selection_path(@selection.id) %>
 </div>
+
+<div>
+  <%= link_to "面接新規作成", new_selection_interview_path(@selection.id) %>
+</div>
+
+<div class="container ">
+<% @interviews.each do |i| %>
+  <table>
+    <tr>
+      <td>面接日</td>
+      <td><%= i.interview_day %></td>
+    </tr>
+    <tr>
+      <td>担当者</td>
+      <td><%= i.charge %></td>
+    </tr>
+    <tr>
+      <td>メモ</td>
+      <td><%= i.memo %></td>
+    </tr>
+  </table>
+<% end %>
+</div>
