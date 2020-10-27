@@ -101,6 +101,12 @@
       <td>メモ</td>
       <td><%= i.memo %></td>
     </tr>
+    <tr>
+      <td>操作</td>
+      <td>
+      <%= link_to "編集", edit_selection_interview_path(@selection.id,i.id) %>
+      </td>
+    </tr>
   </table>
 <% end %>
 </div>
