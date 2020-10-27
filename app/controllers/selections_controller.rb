@@ -8,7 +8,6 @@ class SelectionsController < ApplicationController
 
   def create
     @selection = Selection.new(selection_params)
-    live_flg = true
     if @selection.save
       redirect_to root_path
     else
