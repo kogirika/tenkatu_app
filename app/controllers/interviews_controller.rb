@@ -3,12 +3,12 @@ class InterviewsController < ApplicationController
   def new
     @interview = Interview.new
   end
-  
+
 
   def create
     @interview = Interview.new(interview_params)
     if @interview.save
-      redirect_to root_path
+      redirect_to selection_path(@interview.selection_id)
     else
       render :new
     end
