@@ -1,5 +1,5 @@
 class InterviewsController < ApplicationController
-  before_action :set_interview, only: [:edit, :update, :destory]
+  before_action :set_interview, only: [:edit, :update, :destroy]
 
   def new
     @selection = Selection.find(params[:selection_id])
@@ -25,6 +25,14 @@ class InterviewsController < ApplicationController
       redirect_to selection_path(@interview.selection_id)
     else
       render :edit
+    end
+  end
+
+  def destroy
+    if @interview.destroy
+      redirect_to selection_path(@interview.selection_id)
+    else
+      render template "slections/show"
     end
   end
 
