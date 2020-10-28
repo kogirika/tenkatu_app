@@ -15,11 +15,7 @@ class Selection < ApplicationRecord
   belongs_to :user
   has_many :interviews
 
-  #登録（若い）順ソート
-  def self.sort_young(data)
-    data.order(id: "DESC")
-  end
-
+  #メソッドーーーーーーーーーーーーーーーーーーーーー
   #ユーザーごとの絞り
   def self.descope_user(user_id)
     data = Selection.where(user_id: user_id)
