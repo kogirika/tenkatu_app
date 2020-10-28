@@ -2,7 +2,7 @@ class SelectionsController < ApplicationController
   before_action :set_selection, only: [:show, :destroy, :edit, :update]
 
   def index
-    @selections = Selection.all
+    @selections = Selection.descope_user(current_user.id)
     @selection = Selection.new
   end
 
@@ -11,7 +11,7 @@ class SelectionsController < ApplicationController
     if @selection.save
       redirect_to root_path
     else
-      @selections = Selection.all
+      @selections = Selection.descope_user(current_user.id)
       render :index
     end
   end
