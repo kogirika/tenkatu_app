@@ -116,25 +116,25 @@ Interview.create!(
   [
     {
       interview_day: "2020-11-7",
-      charge: Faker::Name.first_name,
+      charge: Faker::Name.last_name + "さん",
       memo: "印象は良かった。 質問：○○→回答：■■",
       selection_id: 2
     },
     {
       interview_day: "2020-11-08",
-      charge: Faker::Name.first_name,
+      charge: Faker::Name.last_name + "さん",
       memo: "印象は良かった。 質問：○○→回答：■■",
       selection_id: 3
     },
     {
       interview_day: "2020-11-18",
-      charge: Faker::Name.first_name,
+      charge: Faker::Name.last_name + "さん",
       memo: "失敗した。 質問：○○→回答：■■",
       selection_id: 3
     },
     {
       interview_day: "2020-11-20",
-      charge: Faker::Name.first_name,
+      charge: Faker::Name.last_name + "さん",
       memo: "印象は良かった。 質問：○○→回答：■■",
       selection_id: 5
     },
