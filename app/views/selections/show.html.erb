@@ -101,6 +101,14 @@
       <td>メモ</td>
       <td><%= i.memo %></td>
     </tr>
+    <tr>
+      <td>操作</td>
+      <td>
+      <%= link_to "編集", edit_selection_interview_path(@selection.id,i.id) %>
+      <%= link_to "削除", selection_interview_path(@selection.id,i.id), method: :DELETE, data: { confirm: "削除します?" } %>
+
+      </td>
+    </tr>
   </table>
 <% end %>
 </div>
