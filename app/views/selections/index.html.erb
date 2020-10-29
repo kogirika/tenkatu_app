@@ -16,16 +16,16 @@
   </div>
 
   <%# 簡易登録 %>
-  <div class="container" id="simpleregistration">
+  <div class="container  mb-4">
     <%= form_with model: @selection, local: true do |f| %>
 
     <%= render 'shared/error_messages', model: f.object %>
 
-    <div class="form-group">
+    <div class="form-group ">
       <div class="form-row ">
 
         <div class="col">
-          <%= f.text_field :company_name, placeholder:"会社名", maxlength:"30", class: "form-control " %>
+          <%= f.text_field :company_name, placeholder:"企業名", maxlength:"30", class: "form-control " %>
         </div>
 
         <div class="col">
@@ -104,24 +104,32 @@
       <thead class="thead-light">
         <tr>
           <th style="width:13%">フェーズ</th> <%# 1 %>
+          <th style="width:13%">企業名・職種</th> <%# 3 %>
           <th style="width:21%">エージェント</th> <%# 2 %>
-          <th style="width:13%">社名</th> <%# 3 %>
-          <th style="width:13%">職種</th> <%# 4 %>
           <th style="width:15%">エントリー日</th> <%# 5 %>
           <th style="width:9%">リンク</th> <%# 6 %>
-          <th style="width:10%">メモ</th> <%# 7 %>
-          <th style="width:10%">詳細</th> <%# 8 %>
+          <th style="width:10%">要約等</th> <%# 8 %>
 
         </tr>
       </thead>
       <% @selections.each do |selection| %>
       <tbody>
-        <tr>
+        <% if selection.live_flg %>
+          <tr>
+        <% else %>
+          <tr class="table-dark">
+        <% end %>
           <td><%= selection.phase.name %></td> <%# 1 フェーズ%>
+          <td><%= selection.company_name %>：<%= selection.position %></td> <%# 3 社名%>
           <td><%= selection.agent %></td> <%# 2 エージェント%>
-          <td><%= selection.company_name %></td> <%# 3 社名%>
-          <td><%= selection.position %></td> <%# 4 職種%>
           <td><%= selection.entry_day %></td> <%# 5 エントリー日%>
+          <td><%# 6 リンク%>
+            <% unless selection.url.blank? %>
+              <%= link_to(selection.url, target: :_blank, rel: "noopener noreferrer") do %>
+                <i class="fas fa-link"></i>
+              <% end %>
+            <% end %>
+          </td> <%# 6 /リンク%>
           <td>リンク</td> <%# 6 リンク%>
           <td><%= selection.memo %></td> <%# 7 メモ%>
           <td><%= link_to "詳細", selection_path(selection.id) %></td> <%# 8 メモ%>
