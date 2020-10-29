@@ -1,114 +1,133 @@
-<%# ヘッダー %>
-<div class="container mb-4 border-dark border-bottom">
-  <ul class="nav">
-    <li class="nav-item nav-link" style="width:70%">
-      <b>Tenkatu_app</b>
-    </li>
-    <li class="nav-item nav-link" style="width:15%%">
-      ユーザー：<%= current_user.name %>
-    </li>
-    <li class="nav-item text-right" style="width:15%">
-      <%= link_to 'ログアウト', destroy_user_session_path , method: :delete, class: "nav-link" %>
-    </li>
-  </ul>
-</div>
+<body>
 
-<%# 簡易登録 %>
-<div class="container">
-  <%= form_with model: @selection, local: true do |f| %>
+  <%# ヘッダー %>
+  <div class="container mb-4 border-dark border-bottom">
+    <ul class="nav">
+      <li class="nav-item nav-link" style="width:70%">
+        <b>Tenkatu_app</b>
+      </li>
+      <li class="nav-item nav-link" style="width:15%%">
+        ユーザー：<%= current_user.name %>
+      </li>
+      <li class="nav-item text-right" style="width:15%">
+        <%= link_to 'ログアウト', destroy_user_session_path , method: :delete, class: "nav-link" %>
+      </li>
+    </ul>
+  </div>
 
-  <%= render 'shared/error_messages', model: f.object %>
+  <%# 簡易登録 %>
+  <div class="container" id="simpleregistration">
+    <%= form_with model: @selection, local: true do |f| %>
 
-  <div class="form-group">
-    <div class="form-row ">
+    <%= render 'shared/error_messages', model: f.object %>
 
-      <div class="col">
-        <%= f.text_field :company_name, placeholder:"会社名", maxlength:"30", class: "form-control " %>
-      </div>
+    <div class="form-group">
+      <div class="form-row ">
 
-      <div class="col">
-        <%= f.text_field :position, placeholder:"職種", maxlength:"30", class: "form-control " %>
-      </div>
+        <div class="col">
+          <%= f.text_field :company_name, placeholder:"会社名", maxlength:"30", class: "form-control " %>
+        </div>
 
-      <div class="col">
-        <%= f.text_field :agent, placeholder:"エージェント", maxlength:"20", class: "form-control " %>
-      </div>
+        <div class="col">
+          <%= f.text_field :position, placeholder:"職種", maxlength:"30", class: "form-control " %>
+        </div>
 
-      <div class="col">
-        <%= f.date_field :entry_day, value: Time.now.strftime("%Y-%m-%d"), class: "form-control " %>
-      </div>
+        <div class="col">
+          <%= f.text_field :agent, placeholder:"エージェント", maxlength:"20", class: "form-control " %>
+        </div>
 
-      <div class="col">
-        <%= f.text_field :memo, placeholder:"メモ", class: "form-control" %>
-      </div>
+        <div class="col">
+          <%= f.date_field :entry_day, value: Time.now.strftime("%Y-%m-%d"), class: "form-control " %>
+        </div>
 
-      <div class="col">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01">フェーズ</label>
-          </div>
+        <div class="col">
+          <%= f.text_field :memo, placeholder:"メモ", class: "form-control" %>
+        </div>
+
+        <div class="col">
           <%= f.collection_select(:phase_id, Phase.all, :id, :name, {}, class: "form-control")%>
         </div>
-      </div>
 
-      <div class="col">
-        <%= f.submit "登録" ,class: "form-control btn btn-primary" %>
+        <div class="col">
+          <%= f.submit "登録" ,class: "form-control btn btn-primary" %>
+        </div>
       </div>
     </div>
-  </div>
-  <% end %>
-</div>
-
-<%# 絞り込み %>
-<div class="container">
-  <%= form_with url: root_path, method: :GET, local: true do |f| %>
-
-  <div class="form-group">
-    <div class="form-row ">
-      絞り込み：
-      <%= f.select :live_search, {"全て": "all", "選考中": 1, "落選": 0}, class: "form-control" %>
-      <%= f.select :phase_search, {"全て": "all", "応募": 0, "書類選考": 1, "試験": 2, "一次面接": 3, 
-                                   "二次面接": 4, "最終面接": 5, "その他": 6}, class: "form-control" %>
-      <%= f.submit "検索" ,class: "form-control btn btn-primary" %>
-      現在の表示条件
-      状況:<%= @live_search %>
-      フェーズ:<%= @phase_search %>
-    </div>
-  </div>
-  <% end %>
-</div>
-
-
-
-<%# 一覧表示 %>
-<div class="container ">
-  <table class="table table-condensed table-hover">
-    <thead class="thead-light">
-      <tr>
-        <th style="width:13%">フェーズ</th> <%# 1 %>
-        <th style="width:21%">エージェント</th> <%# 2 %>
-        <th style="width:13%">社名</th> <%# 3 %>
-        <th style="width:13%">職種</th> <%# 4 %>
-        <th style="width:15%">エントリー日</th> <%# 5 %>
-        <th style="width:9%">リンク</th> <%# 6 %>
-        <th style="width:10%">メモ</th> <%# 7 %>
-        <th style="width:10%">詳細</th> <%# 8 %>
-
-      </tr>
-    </thead>
-    <% @selections.each do |selection| %>
-    <tbody>
-      <tr>
-        <td><%= selection.phase.name %></td> <%# 1 フェーズ%>
-        <td><%= selection.agent %></td> <%# 2 エージェント%>
-        <td><%= selection.company_name %></td> <%# 3 社名%>
-        <td><%= selection.position %></td> <%# 4 職種%>
-        <td><%= selection.entry_day %></td> <%# 5 エントリー日%>
-        <td>リンク</td> <%# 6 リンク%>
-        <td><%= selection.memo %></td> <%# 7 メモ%>
-        <td><%= link_to "詳細", selection_path(selection.id) %></td> <%# 8 メモ%>
-      </tr>
-    </tbody>
     <% end %>
-  </table>
-</div>
+  </div>
+
+
+  <div class="container focus">
+    <%= form_with url: root_path, method: :GET, local: true do |f| %>
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col-1 d-flex align-items-center">
+          <span class="strong">絞り込み：</span>
+        </div>
+        <div class="col-2">
+          <%= f.select :live_search, {"全て": "all", "選考中": 1, "落選": 0}, {},class: "form-control" %>
+        </div>
+        <div class="col-2">
+          <%= f.select :phase_search, {"全て": "all", "応募": 0, "書類選考": 1, "試験": 2, "一次面接": 3, 
+                                   "二次面接": 4, "最終面接": 5, "その他": 6}, {}, class: "form-control" %>
+        </div>
+        <div class="col-1">
+          <%= f.submit "検索" ,class: "form-control btn btn-info" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%# 一覧表示 条件掲示 %>
+  <div class="container focus">
+    <div class="form-group">
+      <div class="form-row ">
+        <div class="col-2">
+          <span class="strong">現在の表示条件</span>
+        </div>
+        <div class="col-1">
+          状況: <span class="strong"><%= @live_search %></span>
+        </div>
+        <div class="col-2">
+          フェーズ:<span class="strong"><%= @phase_search %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <%# 一覧表示 %>
+  <div class="container ">
+    <table class="table table-condensed table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th style="width:13%">フェーズ</th> <%# 1 %>
+          <th style="width:21%">エージェント</th> <%# 2 %>
+          <th style="width:13%">社名</th> <%# 3 %>
+          <th style="width:13%">職種</th> <%# 4 %>
+          <th style="width:15%">エントリー日</th> <%# 5 %>
+          <th style="width:9%">リンク</th> <%# 6 %>
+          <th style="width:10%">メモ</th> <%# 7 %>
+          <th style="width:10%">詳細</th> <%# 8 %>
+
+        </tr>
+      </thead>
+      <% @selections.each do |selection| %>
+      <tbody>
+        <tr>
+          <td><%= selection.phase.name %></td> <%# 1 フェーズ%>
+          <td><%= selection.agent %></td> <%# 2 エージェント%>
+          <td><%= selection.company_name %></td> <%# 3 社名%>
+          <td><%= selection.position %></td> <%# 4 職種%>
+          <td><%= selection.entry_day %></td> <%# 5 エントリー日%>
+          <td>リンク</td> <%# 6 リンク%>
+          <td><%= selection.memo %></td> <%# 7 メモ%>
+          <td><%= link_to "詳細", selection_path(selection.id) %></td> <%# 8 メモ%>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+</body>
