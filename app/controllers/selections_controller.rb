@@ -1,22 +1,22 @@
 class SelectionsController < ApplicationController
   before_action :set_selection_one, only: [:show, :destroy, :edit, :update]
-  before_action :set_selection_new, only: [:index, :search]
 
+  def index
+    @selection = Selection.new
 
-  def index #処理前にset_selection_newを呼ぶ
     live_search = search_params[:live_search]
     phase_search = search_params[:phase_search]
 
-    #一覧の初期表示条件を設定（選考中で全てのフェーズ）
+    # 一覧の初期表示条件を設定（選考中で全てのフェーズ）
     live_search ||= 1
     phase_search ||= "all"
 
-    #表示条件でレコードを取得する
+    # 表示条件でレコードを取得する
     @selections = Selection.descoped_selection(current_user.id, live_search, phase_search)
 
-    #現在の表示条件を画面に出力するために番号を変換
+    # 現在の表示条件を画面に出力するために番号を変換
     @live_search = display_live_search(live_search)
-    @phase_search = display_phase_search(search_params)
+    @phase_search = display_phase_search(phase_search)
 
   end
 
@@ -25,7 +25,16 @@ class SelectionsController < ApplicationController
     if @selection.save
       redirect_to root_path
     else
-      @selections = Selection.descoped_live(current_user.id)
+      live_search ||= 1
+      phase_search ||= "all"
+
+      # 表示条件でレコードを取得する
+      @selections = Selection.descoped_selection(current_user.id, live_search, phase_search)
+
+      # 現在の表示条件を画面に出力するために番号を変換
+      @live_search = display_live_search(live_search)
+      @phase_search = display_phase_search(phase_search)
+      
       render :index
     end
   end
@@ -71,10 +80,7 @@ class SelectionsController < ApplicationController
     @selection = Selection.find(params[:id])
   end
 
-  def set_selection_new #登録用のインスタンスを用意する
-    @selection = Selection.new
-  end
-
+  #その他メソッドーーーーーーーーーーーーーーーーー
   def display_live_search(live_search)
     case live_search
     when "all"; "全て"
