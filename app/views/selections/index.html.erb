@@ -130,8 +130,22 @@
               <% end %>
             <% end %>
           </td> <%# 6 /リンク%>
-          <td>リンク</td> <%# 6 リンク%>
-          <td><%= selection.memo %></td> <%# 7 メモ%>
+          <td class="sumally-column"><%# 7 /要約等%>
+            <% sumally_class_arr=["info-circle","laugh-beam","frown","clipboard"] %>
+            <% [selection.sumally, selection.appeal, selection.concern, selection.memo].each_with_index do |text,num|%>
+            
+            <% sumally_class = "fas fa-" + sumally_class_arr[num] +" icon" %>
+
+            <% unless text.blank? %>
+              <%= content_tag( :i ,"",class:sumally_class) %>
+              <p class="fukidashi"><%= text %></p>
+            <% else %>
+              <i class="fas fa-border-none"></i>
+            <% end %>
+            <% end %>
+
+
+          </td> <%# 7 メモ%>
           <td><%= link_to "詳細", selection_path(selection.id) %></td> <%# 8 メモ%>
         </tr>
       </tbody>
