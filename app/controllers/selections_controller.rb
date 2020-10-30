@@ -40,7 +40,6 @@ class SelectionsController < ApplicationController
   end
 
   def show #処理前にset_selection_oneを呼ぶ
-    @interviews = Interview.descope_selection(params[:id])
   end
 
   def edit #処理前にset_selection_oneを呼ぶ
