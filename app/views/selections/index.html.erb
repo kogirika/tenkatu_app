@@ -103,12 +103,13 @@
     <table class="table table-condensed table-hover">
       <thead class="thead-light">
         <tr>
-          <th style="width:13%">フェーズ</th> <%# 1 %>
-          <th style="width:13%">企業名・職種</th> <%# 3 %>
-          <th style="width:21%">エージェント</th> <%# 2 %>
-          <th style="width:15%">エントリー日</th> <%# 5 %>
-          <th style="width:9%">リンク</th> <%# 6 %>
-          <th style="width:10%">要約等</th> <%# 8 %>
+          <th style="width:10%">フェーズ</th> <%# 1 %>
+          <th style="width:25%">企業名・職種</th> <%# 2 %>
+          <th style="width:15%">エージェント</th> <%# 3 %>
+          <th style="width:15%">エントリー日</th> <%# 4 %>
+          <th style="width:7%">リンク</th> <%# 5 %>
+          <th style="width:8%">要約等</th> <%# 6 %>
+          <th style="width:20%">メモ</th> <%# 7 %>
 
         </tr>
       </thead>
@@ -120,35 +121,35 @@
           <tr class="table-dark">
         <% end %>
           <td><%= selection.phase.name %></td> <%# 1 フェーズ%>
-          <td>
-          <%= link_to selection_path(selection.id) do %>
-          <%= selection.company_name %>：<%= selection.position %>
-          <% end %>
-          </td> <%# 3 社名%>
-          <td><%= selection.agent %></td> <%# 2 エージェント%>
-          <td><%= selection.entry_day %></td> <%# 5 エントリー日%>
-          <td><%# 6 リンク%>
+          <td><%# 2 企業名・職種%>
+            <%= link_to selection_path(selection.id) do %>
+              <%= selection.company_name %>：<%= selection.position %>
+            <% end %>
+          </td> <%# /2 企業名・職種%>
+          <td><%= selection.agent %></td> <%# 3 エージェント%>
+          <td><%= selection.entry_day %></td> <%# 4 エントリー日%>
+          <td><%# 5 リンク%>
             <% unless selection.url.blank? %>
               <%= link_to(selection.url, target: :_blank, rel: "noopener noreferrer") do %>
                 <i class="fas fa-link"></i>
               <% end %>
             <% end %>
-          </td> <%# 6 /リンク%>
-          <td class="sumally-column"><%# 7 /要約等%>
-            <% sumally_class_arr=["info-circle","laugh-beam","frown","clipboard"] %>
-            <% [selection.sumally, selection.appeal, selection.concern, selection.memo].each_with_index do |text,num|%>
-            
-            <% sumally_class = "fas fa-" + sumally_class_arr[num] +" icon" %>
+          </td> <%# 5 /リンク%>
+          <td class="sumally-column"><%# 6 要約等%>
+            <% sumally_class_arr=["info-circle","laugh-beam","frown"] %>
+            <% [selection.sumally, selection.appeal, selection.concern].each_with_index do |text,num|%>
 
-            <% unless text.blank? %>
-              <%= content_tag( :i ,"",class:sumally_class) %>
-              <p class="fukidashi"><%= text %></p>
-            <% else %>
-              <i class="fas fa-border-none"></i>
-            <% end %>
-            <% end %>
-          </td> <%# 7 メモ%>
+              <% sumally_class = "fas fa-" + sumally_class_arr[num] +" icon" %>
 
+              <% unless text.blank? %>
+                <%= content_tag( :i ,"",class:sumally_class) %>
+                <p class="fukidashi"><%= text %></p>
+              <% else %>
+                <i class="fas fa-border-none"></i>
+              <% end %>
+            <% end %>
+          </td> <%# /6 要約等%>
+          <td><%= selection.memo %></td> <%# 7 メモ%>
         </tr>
       </tbody>
       <% end %>
