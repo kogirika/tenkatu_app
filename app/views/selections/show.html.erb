@@ -7,7 +7,7 @@
         <%= link_to "Tenkatu_app", root_path, class:"text-body font-weight-bold"  %>
       </li>
       <li class="nav-item nav-link" style="width:40%">
-        選考詳細情報：<%= @selection.company_name %>:<%= @selection.position %>
+        <h6>選考詳細情報</h6>
       </li>
       <li class="nav-item nav-link" style="width:15%%">
         ユーザー：<%= current_user.name %>
@@ -20,17 +20,17 @@
 
   <%# 操作ボタン %>
   <div class="container mb-2">
-  <div class="row">
-    <div class="col-2">
-      <%= link_to "TOPに戻る", root_path, class:"btn btn-link" %>
-    </div>
-    <div class="col-2">
-      <%= link_to "編集", edit_selection_path(@selection.id), class:"btn btn-success px-5" %>
-    </div>
-    <div class="col-2">
-      <%= link_to "削除", selection_path(@selection.id), method: :DELETE,
+    <div class="row">
+      <div class="col-2">
+        <%= link_to "TOPに戻る", root_path, class:"btn btn-link" %>
+      </div>
+      <div class="col-2">
+        <%= link_to "編集", edit_selection_path(@selection.id), class:"btn btn-success px-5" %>
+      </div>
+      <div class="col-2">
+        <%= link_to "削除", selection_path(@selection.id), method: :DELETE,
                           class:"btn btn-danger px-5", data: { confirm: "削除しますか？" }%>
-    </div>
+      </div>
     </div>
   </div>
 
@@ -90,29 +90,22 @@
       </tr>
     </table>
   </div>
-
-  <div>
-    <%= link_to "戻る", root_path %>
-  </div>
-
-  <div>
-    <%= link_to "削除", selection_path(@selection.id), method: :DELETE %>
-  </div>
-
-  <div>
-    <%= link_to "編集", edit_selection_path(@selection.id) %>
-  </div>
-
-  <div>
-    <%= link_to "面接新規作成", new_selection_interview_path(@selection.id) %>
-  </div>
-
-  <div class="container ">
-    <% @selection.interviews.each do |i| %>
-    <table>
+  
+  <%# 面接情報 %>
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-3">
+        <h4>面接情報</h4>
+      </div>
+      <div class="col-2">
+        <%= link_to "面接新規作成", new_selection_interview_path(@selection.id), class:"btn btn-primary" %>
+      </div>
+    </div>
+    <% @selection.interviews.order("interview_day DESC").each do |i| %>
+    <table class="table table-condensed table-bordered" style="table-layout:fixed;">
       <tr>
-        <td>面接日</td>
-        <td><%= i.interview_day %></td>
+        <td style="width:15%;">面接日</td>
+        <td style="width:85%;"><%= i.interview_day %></td>
       </tr>
       <tr>
         <td>担当者</td>
@@ -120,17 +113,18 @@
       </tr>
       <tr>
         <td>メモ</td>
-        <td><%= i.memo %></td>
+        <td><%= raw(nl2br(h(i.memo))) %></td>
       </tr>
       <tr>
         <td>操作</td>
         <td>
-          <%= link_to "編集", edit_selection_interview_path(@selection.id,i.id) %>
-          <%= link_to "削除", selection_interview_path(@selection.id,i.id), method: :DELETE, data: { confirm: "削除します?" } %>
-
+          <%= link_to "編集", edit_selection_interview_path(@selection.id,i.id), class:"btn btn-outline-success px-5"%>
+          <%= link_to "削除", selection_interview_path(@selection.id,i.id), method: :DELETE,
+                              data: { confirm: "削除します?" },class:"btn btn-outline-danger px-5"%>
         </td>
       </tr>
     </table>
     <% end %>
   </div>
+
 </body>
