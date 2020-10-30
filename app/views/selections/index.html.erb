@@ -120,7 +120,11 @@
           <tr class="table-dark">
         <% end %>
           <td><%= selection.phase.name %></td> <%# 1 フェーズ%>
-          <td><%= selection.company_name %>：<%= selection.position %></td> <%# 3 社名%>
+          <td>
+          <%= link_to selection_path(selection.id) do %>
+          <%= selection.company_name %>：<%= selection.position %>
+          <% end %>
+          </td> <%# 3 社名%>
           <td><%= selection.agent %></td> <%# 2 エージェント%>
           <td><%= selection.entry_day %></td> <%# 5 エントリー日%>
           <td><%# 6 リンク%>
@@ -143,10 +147,8 @@
               <i class="fas fa-border-none"></i>
             <% end %>
             <% end %>
-
-
           </td> <%# 7 メモ%>
-          <td><%= link_to "詳細", selection_path(selection.id) %></td> <%# 8 メモ%>
+
         </tr>
       </tbody>
       <% end %>
