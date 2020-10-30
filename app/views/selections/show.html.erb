@@ -31,6 +31,9 @@
         <%= link_to "削除", selection_path(@selection.id), method: :DELETE,
                           class:"btn btn-danger px-5", data: { confirm: "削除しますか？" }%>
       </div>
+      <div class="col-2">
+        <%= link_to "面接新規作成", new_selection_interview_path(@selection.id), class:"btn btn-primary" %>
+      </div>
     </div>
   </div>
 
@@ -92,13 +95,11 @@
   </div>
   
   <%# 面接情報 %>
+  <% unless @selection.interviews.blank? %>
   <div class="container">
     <div class="row mb-2">
       <div class="col-3">
         <h4>面接情報</h4>
-      </div>
-      <div class="col-2">
-        <%= link_to "面接新規作成", new_selection_interview_path(@selection.id), class:"btn btn-primary" %>
       </div>
     </div>
     <% @selection.interviews.order("interview_day DESC").each do |i| %>
@@ -126,5 +127,5 @@
     </table>
     <% end %>
   </div>
-
+  <% end %>
 </body>
