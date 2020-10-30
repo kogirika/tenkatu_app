@@ -1,114 +1,130 @@
-<%# ヘッダー %>
-<div class="container mb-4 border-dark border-bottom">
-  <ul class="nav">
-    <li class="nav-item nav-link" style="widtd:70%">
-      <b>Tenkatu_app 詳細ページ</b>
-    </li>
-    <li class="nav-item nav-link" style="widtd:15%%">
-      ユーザー：<%= current_user.name %>
-    </li>
-    <li class="nav-item text-right" style="widtd:15%">
-      <%= link_to 'ログアウト', destroy_user_session_path , metdod: :delete, class: "nav-link" %>
-    </li>
-  </ul>
-</div>
+<body>
+
+  <%# ヘッダー %>
+  <div class="container mb-4 border-dark border-bottom">
+    <ul class="nav">
+      <li class="nav-item nav-link" style="width:20%">
+        <%= link_to "Tenkatu_app", root_path, class:"text-body font-weight-bold"  %>
+      </li>
+      <li class="nav-item nav-link" style="width:40%">
+        <h6>選考詳細情報</h6>
+      </li>
+      <li class="nav-item nav-link" style="width:15%%">
+        ユーザー：<%= current_user.name %>
+      </li>
+      <li class="nav-item text-right" style="width:15%">
+        <%= link_to 'ログアウト', destroy_user_session_path , metdod: :delete, class: "nav-link" %>
+      </li>
+    </ul>
+  </div>
+
+  <%# 操作ボタン %>
+  <div class="container mb-2">
+    <div class="row">
+      <div class="col-2">
+        <%= link_to "TOPに戻る", root_path, class:"btn btn-link" %>
+      </div>
+      <div class="col-2">
+        <%= link_to "編集", edit_selection_path(@selection.id), class:"btn btn-success px-5" %>
+      </div>
+      <div class="col-2">
+        <%= link_to "削除", selection_path(@selection.id), method: :DELETE,
+                          class:"btn btn-danger px-5", data: { confirm: "削除しますか？" }%>
+      </div>
+    </div>
+  </div>
 
 
-<%# 一覧表示 %>
-<div class="container ">
-  <table>
-    <tr>
-      <td>フラグ</td>
-      <td><%= @selection.live_flg %></td>
-    </tr>
-    <tr>
-      <td>フェーズ</td>
-      <td><%= @selection.phase.name %></td>
-    </tr>
-    <tr>
-      <td>会社名</td>
-      <td><%= @selection.company_name %></td>
-    </tr>
-    <tr>
-      <td>職種</td>
-      <td><%= @selection.position %></td>
-    </tr>
-    <tr>
-      <td>URL</td>
-      <td><%= @selection.url %></td>
-    </tr>
-    <tr>
-      <td>要約</td>
-      <td><%= @selection.sumally %></td>
-    </tr>
-    <tr>
-      <td>良い点</td>
-      <td><%= @selection.appeal %></td>
-    </tr>
-    <tr>
-      <td>懸念点</td>
-      <td><%= @selection.concern %></td>
-    </tr>
-    <tr>
-      <td>メモ</td>
-      <td><%= @selection.memo %></td>
-    </tr>
-    <% unless @selection.refusal_reason.blank? %>
-    <tr>
-      <td>落選理由</td>
-      <td><%= @selection.refusal_reason %></td>
-    </tr>
+  <%# 詳細表示 %>
+  <div class="container ">
+    <table class="table table-condensed table-bordered" style="table-layout:fixed;">
+      <% if @selection.live_flg %>
+      <tr>
+        <% else %>
+      <tr class="table-dark">
+        <% end %>
+        <td style="width:15%;">フェーズ</td>
+        <td style="width:85%;"><%= @selection.phase.name %></td>
+      </tr>
+      <tr>
+        <td>企業名:職種</td>
+        <td><%= @selection.company_name %>：<%= @selection.position %></td>
+      </tr>
+      <tr>
+        <td>URL</td>
+        <td><%= link_to @selection.url, @selection.url, target: :_blank, rel: "noopener noreferrer" %></td>
+      </tr>
+      <tr>
+        <td>場所</td>
+        <td><%= @selection.place %></td>
+      </tr>
+      <tr>
+        <td>要約</td>
+        <td><%= raw(nl2br(h(@selection.sumally))) %></td>
+      </tr>
+      <tr>
+        <td>良い点</td>
+        <td><%= raw(nl2br(h(@selection.appeal))) %></td>
+      </tr>
+      <tr>
+        <td>懸念点</td>
+        <td><%= raw(nl2br(h(@selection.concern))) %></td>
+      </tr>
+      <tr>
+        <td>メモ</td>
+        <td><%= raw(nl2br(h(@selection.memo))) %></td>
+      </tr>
+      <% unless @selection.refusal_reason.blank? %>
+      <tr>
+        <td>落選理由</td>
+        <td><%= @selection.refusal_reason %></td>
+      </tr>
+      <% end %>
+      <tr>
+        <td>エージェント</td>
+        <td><%= @selection.agent %></td>
+      </tr>
+      <tr>
+        <td>エントリー日</td>
+        <td><%= @selection.entry_day %></td>
+      </tr>
+    </table>
+  </div>
+  
+  <%# 面接情報 %>
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-3">
+        <h4>面接情報</h4>
+      </div>
+      <div class="col-2">
+        <%= link_to "面接新規作成", new_selection_interview_path(@selection.id), class:"btn btn-primary" %>
+      </div>
+    </div>
+    <% @selection.interviews.order("interview_day DESC").each do |i| %>
+    <table class="table table-condensed table-bordered" style="table-layout:fixed;">
+      <tr>
+        <td style="width:15%;">面接日</td>
+        <td style="width:85%;"><%= i.interview_day %></td>
+      </tr>
+      <tr>
+        <td>担当者</td>
+        <td><%= i.charge %></td>
+      </tr>
+      <tr>
+        <td>メモ</td>
+        <td><%= raw(nl2br(h(i.memo))) %></td>
+      </tr>
+      <tr>
+        <td>操作</td>
+        <td>
+          <%= link_to "編集", edit_selection_interview_path(@selection.id,i.id), class:"btn btn-outline-success px-5"%>
+          <%= link_to "削除", selection_interview_path(@selection.id,i.id), method: :DELETE,
+                              data: { confirm: "削除します?" },class:"btn btn-outline-danger px-5"%>
+        </td>
+      </tr>
+    </table>
     <% end %>
-    <tr>
-      <td>エージェント</td>
-      <td><%= @selection.agent %></td>
-    </tr>
-    <tr>
-      <td>エントリー日</td>
-      <td><%= @selection.entry_day %></td>
-    </tr>
-  </table>
-</div>
+  </div>
 
-<div>
-  <%= link_to "戻る", root_path %>
-</div>
-
-<div>
-  <%= link_to "削除", selection_path(@selection.id), method: :DELETE %>
-</div>
-
-<div>
-  <%= link_to "編集", edit_selection_path(@selection.id) %>
-</div>
-
-<div>
-  <%= link_to "面接新規作成", new_selection_interview_path(@selection.id) %>
-</div>
-
-<div class="container ">
-<% @interviews.each do |i| %>
-  <table>
-    <tr>
-      <td>面接日</td>
-      <td><%= i.interview_day %></td>
-    </tr>
-    <tr>
-      <td>担当者</td>
-      <td><%= i.charge %></td>
-    </tr>
-    <tr>
-      <td>メモ</td>
-      <td><%= i.memo %></td>
-    </tr>
-    <tr>
-      <td>操作</td>
-      <td>
-      <%= link_to "編集", edit_selection_interview_path(@selection.id,i.id) %>
-      <%= link_to "削除", selection_interview_path(@selection.id,i.id), method: :DELETE, data: { confirm: "削除します?" } %>
-
-      </td>
-    </tr>
-  </table>
-<% end %>
-</div>
+</body>

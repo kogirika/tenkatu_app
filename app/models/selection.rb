@@ -13,7 +13,7 @@ class Selection < ApplicationRecord
 
   #アソシエーション
   belongs_to :user
-  has_many :interviews
+  has_many :interviews, dependent: :destroy
 
   #メソッドーーーーーーーーーーーーーーーーーーーーー
   #ユーザーごとの絞り
