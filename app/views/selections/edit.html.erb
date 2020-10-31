@@ -41,18 +41,15 @@
         </div>
       </div>
 
-
       <div class="col input-group">
         <label class="input-group-text" for="phaseSelect">フェーズ:</label>
         <%= f.collection_select(:phase_id, Phase.all, :id, :name, {}, class: "form-control", id:"phaseSelect")%>
       </div>
 
-
       <div class="col input-group">
         <label class="input-group-text" for="company_nameInput">企業名:</label>
         <%= f.text_field :company_name, placeholder:"企業名", maxlength:"30", class: "form-control ", id:"company_nameInput" %>
       </div>
-
 
       <div class="col input-group">
         <label class="input-group-text" for="positionInput">職種:</label>
