@@ -4,7 +4,7 @@
   <div class="container mb-4 border-dark border-bottom">
     <ul class="nav">
       <li class="nav-item nav-link" style="width:70%">
-        <b>Tenkatu_app</b>
+        <%= link_to "Tenkatu_app", root_path, class:"text-body font-weight-bold"  %>
       </li>
       <li class="nav-item nav-link" style="width:15%%">
         ユーザー：<%= current_user.name %>
@@ -86,7 +86,7 @@
         <div class="col-2">
           <span class="strong">現在の表示条件</span>
         </div>
-        <div class="col-1">
+        <div class="col-2">
           状況: <span class="strong"><%= @live_search %></span>
         </div>
         <div class="col-2">

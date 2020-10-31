@@ -8,7 +8,7 @@ class SelectionsController < ApplicationController
     phase_search = search_params[:phase_search]
 
     # 一覧の初期表示条件を設定（選考中で全てのフェーズ）
-    live_search ||= 1
+    live_search ||= "1"
     phase_search ||= "all"
 
     # 表示条件でレコードを取得する
@@ -25,7 +25,7 @@ class SelectionsController < ApplicationController
     if @selection.save
       redirect_to root_path
     else
-      live_search ||= 1
+      live_search ||= "1"
       phase_search ||= "all"
 
       # 表示条件でレコードを取得する
