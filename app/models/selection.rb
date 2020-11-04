@@ -15,7 +15,6 @@ class Selection < ApplicationRecord
                                       message:"を選択してください"}
   end
     validates :url, format: {with:/\A#{URI::regexp(%w(http https))}\z/}, allow_blank: true
-    validate :date_valid?
 
 
   #アソシエーション
@@ -41,11 +40,5 @@ class Selection < ApplicationRecord
     sort_young(data)
   end
 
-  require 'date'
-
-  private
-  def date_valid?
-    !! Date.parse(:entry_day) rescue false
-  end
 
 end
