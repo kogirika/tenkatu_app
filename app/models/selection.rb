@@ -8,8 +8,15 @@ class Selection < ApplicationRecord
 
   # バリデーション
   with_options presence: true do
-    validates :company_name, :phase_id, :entry_day
+    validates :company_name, :entry_day
+    validates :phase_id, numericality:{only_integer: true,
+                                      greater_than_or_equal_to: 0,
+                                      less_than_or_equal_to: 6,
+                                      message:"を選択してください"}
   end
+    validates :url, format: {with:/\A#{URI::regexp(%w(http https))}\z/}, allow_blank: true
+    validate :date_valid?
+
 
   #アソシエーション
   belongs_to :user
@@ -32,6 +39,13 @@ class Selection < ApplicationRecord
       data = data.where(phase_id: phase_search, live_flg: live_search)
     end
     sort_young(data)
+  end
+
+  require 'date'
+
+  private
+  def date_valid?
+    !! Date.parse(:entry_day) rescue false
   end
 
 end
