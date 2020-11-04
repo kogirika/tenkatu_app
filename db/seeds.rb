@@ -26,7 +26,7 @@ Selection.create!(
       url: "https://www.yahoo.co.jp/",
       sumally: Faker::Lorem.paragraph,
       appeal: Faker::Lorem.paragraph,
-      concern: Faker::Lorem.paragraph,
+      anxiety: Faker::Lorem.paragraph,
       memo: "テスト１",
       user_id: 1
     },
@@ -42,7 +42,7 @@ Selection.create!(
       url: "https://www.google.co.jp/",
       sumally: Faker::Lorem.paragraph,
       appeal: Faker::Lorem.paragraph,
-      concern: Faker::Lorem.paragraph,
+      anxiety: Faker::Lorem.paragraph,
       memo: "テスト2",
       user_id: 1
       },
@@ -55,10 +55,9 @@ Selection.create!(
       live_flg: 0,
       refusal_reason: "経験が満たなかったため",
       place: "中野",
-      url: "https://www.msn.com/ja-jp",
       sumally: Faker::Lorem.paragraph,
       appeal: Faker::Lorem.paragraph,
-      concern: Faker::Lorem.paragraph,
+      anxiety: Faker::Lorem.paragraph,
       memo: "テスト3",
       user_id: 1
     },
@@ -74,7 +73,7 @@ Selection.create!(
       url: "",
       sumally: Faker::Lorem.paragraph,
       appeal: Faker::Lorem.paragraph,
-      concern: Faker::Lorem.paragraph,
+      anxiety: Faker::Lorem.paragraph,
       memo: "テスト4",
       user_id: 2
     },
@@ -90,7 +89,7 @@ Selection.create!(
       url: "",
       sumally: Faker::Lorem.paragraph,
       appeal: Faker::Lorem.paragraph,
-      concern: Faker::Lorem.paragraph,
+      anxiety: Faker::Lorem.paragraph,
       memo: "テスト5",
       user_id: 2
     },
@@ -106,7 +105,7 @@ Selection.create!(
       url: "",
       sumally: Faker::Lorem.paragraph,
       appeal: Faker::Lorem.paragraph,
-      concern: Faker::Lorem.paragraph,
+      anxiety: Faker::Lorem.paragraph,
       memo: "テスト6",
       user_id: 2
     }

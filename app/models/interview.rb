@@ -12,5 +12,4 @@ class Interview < ApplicationRecord
     sort_young(data)
   end
 
-
 end

@@ -13,7 +13,7 @@ class CreateSelections < ActiveRecord::Migration[6.0]
       t.string :url
       t.text :sumally
       t.text :appeal
-      t.text :concern
+      t.text :anxiety
       t.text :memo
       t.timestamps
     end

@@ -66,7 +66,7 @@ class SelectionsController < ApplicationController
   #paramsメソッドーーーーーーーーーーーーーーーーーー
   def selection_params
     params.require(:selection).permit(:company_name, :position, :entry_day, :phase_id,
-                                      :live_flg, :agent, :memo, :url ,:sumally, :appeal, :concern,
+                                      :live_flg, :agent, :memo, :url ,:sumally, :appeal, :anxiety,
                                       :place, :refusal_reason).merge(user_id: current_user.id)
   end
 
