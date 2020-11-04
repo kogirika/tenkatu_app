@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # バリデーション
+  validates :name, presence: true
+
 
   #アソシエーション
   has_many :selections, dependent: :destroy
