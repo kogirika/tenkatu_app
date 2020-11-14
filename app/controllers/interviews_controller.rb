@@ -1,5 +1,6 @@
 class InterviewsController < ApplicationController
-  before_action :set_interview, only: [:edit, :update, :destroy]
+  before_action :set_interview_one, only: [:edit, :update, :destroy]
+  before_action :ensure_correct_user # 他のユーザーの情報に飛べないようにする
 
   def new
     @selection = Selection.find(params[:selection_id])
@@ -42,8 +43,14 @@ class InterviewsController < ApplicationController
     params.require(:interview).permit(:interview_day, :charge, :memo).merge(selection_id: params[:selection_id])
   end
 
-  def set_interview
+  def set_interview_one
     @interview = Interview.find(params[:id])
   end
 
+  def ensure_correct_user # 他のユーザーの情報に飛べないようにする
+    @interview = Interview.find(params[:id])
+    unless @interview.selection.user == current_user
+      redirect_to root_path
+    end
+  end
 end
