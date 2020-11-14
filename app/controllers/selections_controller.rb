@@ -1,5 +1,6 @@
 class SelectionsController < ApplicationController
   before_action :set_selection_one, only: [:show, :destroy, :edit, :update]
+  before_action :ensure_correct_user, except: :index # 他のユーザーの情報に飛べないようにする
 
   def index
     @selection = Selection.new
@@ -77,6 +78,13 @@ class SelectionsController < ApplicationController
   #事前セット用メソッドーーーーーーーーーーーーーーーーー
   def set_selection_one #１レコードを返す
     @selection = Selection.find(params[:id])
+  end
+
+  def ensure_correct_user # 他のユーザーの情報に飛べないようにする
+    @selection = Selection.find(params[:id])
+    unless @selection.user == current_user
+      redirect_to root_path
+    end
   end
 
   #その他メソッドーーーーーーーーーーーーーーーーー
