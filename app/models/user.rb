@@ -7,7 +7,6 @@ class User < ApplicationRecord
   # バリデーション
   validates :name, presence: true
 
-
-  #アソシエーション
+  # アソシエーション
   has_many :selections, dependent: :destroy
 end

@@ -8,7 +8,7 @@ FactoryBot.define do
     live_flg              { Faker::Boolean.boolean }
     refusal_reason        { Faker::Lorem.paragraph }
     place                 { Faker::Address.city }
-    url                   { Faker::Internet.url(host: 'example.com') }
+    url                   { Faker::Internet.url(host: "example.com") }
     sumally               { Faker::Lorem.paragraph }
     appeal                { Faker::Lorem.paragraph }
     anxiety               { Faker::Lorem.paragraph }

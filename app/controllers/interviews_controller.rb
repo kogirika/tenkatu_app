@@ -7,7 +7,6 @@ class InterviewsController < ApplicationController
     @interview = Interview.new
   end
 
-
   def create
     @interview = Interview.new(interview_params)
     if @interview.save
@@ -47,10 +46,9 @@ class InterviewsController < ApplicationController
     @interview = Interview.find(params[:id])
   end
 
-  def ensure_correct_user # 他のユーザーの情報に飛べないようにする
+  def ensure_correct_user
+    # 他のユーザーの情報に飛べないようにする
     @interview = Interview.find(params[:id])
-    unless @interview.selection.user == current_user
-      redirect_to root_path
-    end
+    redirect_to root_path unless @interview.selection.user == current_user
   end
 end
