@@ -39,6 +39,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem "forgery_ja"
+  gem "rubocop", require: false
 end
 
 group :development do
