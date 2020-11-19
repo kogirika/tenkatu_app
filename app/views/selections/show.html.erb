@@ -55,7 +55,7 @@
       </tr>
       <tr>
         <td>URL</td>
-        <td><%= link_to @selection.url, @selection.url, target: :_blank, rel: "noopener noreferrer" %></td>
+        <td><%= link_to_if @selection.url, @selection.url, @selection.url, target: :_blank, rel: "noopener noreferrer" %></td>
       </tr>
       <tr>
         <td>場所</td>
