@@ -1,6 +1,6 @@
 class InterviewsController < ApplicationController
   before_action :set_interview_one, only: [:edit, :update, :destroy]
-  before_action :ensure_correct_user # 他のユーザーの情報に飛べないようにする
+  before_action :ensure_correct_user, except: [:new, :create] # 他のユーザーの情報に飛べないようにする
 
   def new
     @selection = Selection.find(params[:selection_id])

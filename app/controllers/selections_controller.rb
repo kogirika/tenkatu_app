@@ -1,6 +1,6 @@
 class SelectionsController < ApplicationController
   before_action :set_selection_one, only: [:show, :destroy, :edit, :update]
-  before_action :ensure_correct_user, except: :index # 他のユーザーの情報に飛べないようにする
+  before_action :ensure_correct_user, except: [:index, :create] # 他のユーザーの情報に飛べないようにする
 
   def index
     @selection = Selection.new
