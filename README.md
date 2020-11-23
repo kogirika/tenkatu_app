@@ -25,7 +25,7 @@ Tenkatu_app
 
 
 ## DEMO
-<img src="" width="480px">
+<img src="https://user-images.githubusercontent.com/67131613/99976553-edc87f00-2de6-11eb-885d-630d74f6deba.gif" width="480px">
 <br />
 
 
