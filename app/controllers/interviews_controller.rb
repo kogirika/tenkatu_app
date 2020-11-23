@@ -1,12 +1,11 @@
 class InterviewsController < ApplicationController
   before_action :set_interview_one, only: [:edit, :update, :destroy]
-  before_action :ensure_correct_user # 他のユーザーの情報に飛べないようにする
+  before_action :ensure_correct_user, except: [:new, :create] # 他のユーザーの情報に飛べないようにする
 
   def new
     @selection = Selection.find(params[:selection_id])
     @interview = Interview.new
   end
-
 
   def create
     @interview = Interview.new(interview_params)
@@ -47,10 +46,9 @@ class InterviewsController < ApplicationController
     @interview = Interview.find(params[:id])
   end
 
-  def ensure_correct_user # 他のユーザーの情報に飛べないようにする
+  def ensure_correct_user
+    # 他のユーザーの情報に飛べないようにする
     @interview = Interview.find(params[:id])
-    unless @interview.selection.user == current_user
-      redirect_to root_path
-    end
+    redirect_to root_path unless @interview.selection.user == current_user
   end
 end

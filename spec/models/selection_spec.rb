@@ -10,7 +10,7 @@ RSpec.describe Selection, type: :model do
         expect(@s).to be_valid
       end
       it "必須以外が抜けていても保存できること" do
-        @s.agent, @s.position, @s.url, @s.place, @s.sumally, @s.appeal, @s.anxiety,@s.memo ,@s.refusal_reason = nil
+        @s.agent, @s.position, @s.url, @s.place, @s.sumally, @s.appeal, @s.anxiety, @s.memo, @s.refusal_reason = nil
         expect(@s).to be_valid
       end
     end
