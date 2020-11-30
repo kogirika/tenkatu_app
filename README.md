@@ -44,7 +44,7 @@ Tenkatu_app
 Ruby, Ruby on Rails
 
 #### フロントエンド
-HTML,CSS,JavaScript,Bootstrap4,fontawesome
+HTML,CSS,Bootstrap4,fontawesome
 
 #### データベース
 MySQL SequelPro
@@ -65,16 +65,16 @@ RSpec
 VScode
 
 #### 上記以外の使用Gem
-factory_bot_rails
-faker
-rubocop
-rails-i18n
-active_hash
-devise
-awesome_print
-better_errors
-binding_of_caller
-forgery_ja"
+- factory_bot_rails
+- faker
+- forgery_ja
+- rails-i18n
+- active_hash
+- devise
+- awesome_print
+- better_errors
+- binding_of_caller
+- rubocop
 <br /><br />
 
 ## 課題や今後実装したい機能
